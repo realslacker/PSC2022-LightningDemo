@@ -14,8 +14,6 @@ if ( -not $LowestUSN ) {
     $LowestUSN = 0
 }
 
-# uSNChanged / uSNCreated
-
 Write-Host "Fetching users with uSNChanged between $LowestUSN and $HighestUSN (ADSI)..." -ForegroundColor Cyan
 
 $Searcher = $DomainController.GetDirectorySearcher()
