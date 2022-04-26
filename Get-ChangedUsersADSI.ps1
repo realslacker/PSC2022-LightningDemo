@@ -10,8 +10,8 @@ $DomainController = [System.DirectoryServices.ActiveDirectory.DomainController]:
 
 $HighestUSN = $DomainController.HighestCommittedUsn
 
-if ( -not $LowestUSN ) {
-    $LowestUSN = 0
+if ( -not $Global:LowestUSN ) {
+    $Global:LowestUSN = 0
 }
 
 Write-Host "Fetching users with uSNChanged between $LowestUSN and $HighestUSN (ADSI)..." -ForegroundColor Cyan
@@ -29,4 +29,4 @@ $Searcher.FindAll().ForEach({
 
 })
 
-$LowestUSN = $HighestUSN + 1
+$Global:LowestUSN = $HighestUSN + 1

@@ -9,8 +9,8 @@ $RootDSE = Get-ADRootDSE @ADSplat
 
 $HighestUSN = $RootDSE.highestCommittedUSN
 
-if ( -not $LowestUSN ) {
-    $LowestUSN = 0
+if ( -not $Global:LowestUSN ) {
+    $Global:LowestUSN = 0
 }
 
 Write-Host "Fetching users with uSNChanged between $LowestUSN and $HighestUSN..." -ForegroundColor Cyan
@@ -18,4 +18,4 @@ Write-Host "Fetching users with uSNChanged between $LowestUSN and $HighestUSN...
 Get-ADUser -Filter "uSNChanged -gt $LowestUSN -and uSNChanged -le $HighestUSN" -Properties uSNChanged, uSNCreated @ADSplat |
     Select-Object Name, uSNCreated, uSNChanged
 
-$LowestUSN = $HighestUSN
+$Global:LowestUSN = $HighestUSN
