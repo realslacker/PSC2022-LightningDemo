@@ -15,6 +15,7 @@ if ( -not $LowestUSN ) {
 
 Write-Host "Fetching users with uSNChanged between $LowestUSN and $HighestUSN..." -ForegroundColor Cyan
 
-Get-ADUser -Filter "uSNChanged -gt $LowestUSN -and uSNChanged -le $HighestUSN" -Properties uSNChanged, uSNCreated @ADSplat | select Name, uSNCreated, uSNChanged
+Get-ADUser -Filter "uSNChanged -gt $LowestUSN -and uSNChanged -le $HighestUSN" -Properties uSNChanged, uSNCreated @ADSplat |
+    Select-Object Name, uSNCreated, uSNChanged
 
 $LowestUSN = $HighestUSN
